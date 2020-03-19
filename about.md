@@ -17,4 +17,4 @@
   
   
   
-### How to contact me? Please visit my [Contact](/contact.md) page.
+### How to contact me? Please visit my [Contact](/contact.html) page.
