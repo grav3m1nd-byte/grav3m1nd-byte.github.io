@@ -1,7 +1,14 @@
-# Grav3m1ndbyte's Hack The Box Retired Machines WriteUps 
+# Grav3m1ndbyte's Hack The Box Retired Machines Walkthroughs 
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
+
+
+
+
+  As Hack The Box members are not supposed to release any write up or walkthrough while machines or challenges are stil Active, I will be updating the content as the machines start to get retired.
+
+  At the moment, I don't have much here as the rest of my walkthroughs are from machines that are still active. If my assistance is needed, refer to my [Contact Me](/contact.md) page and feel free to do so.
 
 
 
