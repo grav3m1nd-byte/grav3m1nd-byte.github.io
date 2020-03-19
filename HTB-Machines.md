@@ -18,7 +18,7 @@
 
 
 ## Completed Active Machines
-###  [Forest](/HTB-Active/Forest/forest.html)
+###  [Forest](/HTB-Active/forest.html)
 
 
 ## My advice to you all!
