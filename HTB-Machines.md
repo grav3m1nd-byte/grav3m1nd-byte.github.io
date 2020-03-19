@@ -1,4 +1,4 @@
-# [Grav3m1ndbyte's Resources Blog](/index.html) > Hack The Box Retired Machines Walkthroughs
+# [Grav3m1ndbyte's Resources Blog](/index.html) > Hack The Box Machine Walkthroughs
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
@@ -8,15 +8,17 @@
 
   As Hack The Box members are not supposed to release any write up or walkthrough while machines or challenges are stil Active, I will be updating the content as the machines start to get retired.
 
-  At the moment, I don't have much here as the rest of my walkthroughs are from machines that are still active. If my assistance is needed, refer to my [Contact Me](/contact.html) page and feel free to do so.
+  At the moment, I don't have much here as the rest of my walkthroughs are from machines that are still active and back when I started with Hack The Box I did not think of doing my own walkthrough until recently. If my assistance is needed, refer to my [Contact Me](/contact.html) page and feel free to do so.
 
 
 
 
-##  Machines
-### 1. [Postman](Postman/postman.html)
+## Retired Machines Walkthroughs
+###   [Postman](HTB-Retired/Postman/postman.html) - OS: Linux
 
 
+## Completed Active Machines
+###  [Forest](HTB-Active/Forest/forest.html)
 
 
 ## My advice to you all!
