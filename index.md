@@ -1,4 +1,4 @@
-# [Grav3m1ndbyte's Resources Blog](index.md)
+# [Grav3m1ndbyte's Resources Blog](index.html)
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
@@ -19,9 +19,9 @@
 
 
 # Useful Pages:
-## [About Me](/about.md)
-## [Contact Me](/contact.md)
-## [Hack The Box Retired Machines](/HTB-Retired/HTB-RetiredMachines.md)
+## [About Me](/about.html)
+## [Contact Me](/contact.html)
+## [Hack The Box Retired Machines](/HTB-Retired/HTB-RetiredMachines.html)
 
 
 
