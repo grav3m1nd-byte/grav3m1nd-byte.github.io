@@ -1,4 +1,4 @@
-# Grav3m1ndbyte's Resources Blog
+# [Grav3m1ndbyte's Resources Blog](index.md)
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
@@ -6,7 +6,7 @@
 
 
 
-## Purpose of this site:
+# Purpose of this site:
 
   This site is meant to help people by sharing the resources I think are useful or have been useful, while giving other people's resources more exposure, which I understand helps them as well. In addition to this, I like to share the paths taken on Hack the Box Machines I had completed. If anything I can be reached in the forum, DMs in Hack The Box or Discord. 
 
@@ -17,8 +17,12 @@
 
 
 
-##  Machines
-### 1. [Postman](/Postman/postman.md)
+
+# Useful Pages:
+## [About Me](/about.md)
+## [Contact Me](/contact.md)
+## [Hack The Box Retired Machines](/HTB-Retired/HTB-RetiredMachines.md)
+
 
 
 
