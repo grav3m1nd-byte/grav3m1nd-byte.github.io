@@ -8,7 +8,7 @@
 
   As Hack The Box members are not supposed to release any write up or walkthrough while machines or challenges are stil Active, I will be updating the content as the machines start to get retired.
 
-  At the moment, I don't have much here as the rest of my walkthroughs are from machines that are still active. If my assistance is needed, refer to my [Contact Me](/contact.md) page and feel free to do so.
+  At the moment, I don't have much here as the rest of my walkthroughs are from machines that are still active. If my assistance is needed, refer to my [Contact Me](/contact.html) page and feel free to do so.
 
 
 
