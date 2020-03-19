@@ -1,4 +1,4 @@
-# [Grav3m1ndbyte's Resources Blog](/index.md) > Hack The Box Retired Machines Walkthroughs
+# [Grav3m1ndbyte's Resources Blog](/index.html) > Hack The Box Retired Machines Walkthroughs
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
@@ -14,7 +14,7 @@
 
 
 ##  Machines
-### 1. [Postman](Postman/postman.md)
+### 1. [Postman](Postman/postman.html)
 
 
 
