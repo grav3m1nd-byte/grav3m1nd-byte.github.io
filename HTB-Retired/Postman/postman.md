@@ -3,7 +3,7 @@
 
 # Postman
 
-![Postman Infocard](images/Postman.png)
+![Postman Infocard](/images/Postman.png)
 
 
 
