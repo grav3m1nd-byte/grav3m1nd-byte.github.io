@@ -1,7 +1,7 @@
 # Grav3m1ndbyte's Hack The Box WriteUps
 
 
-&lt;script src=&quot;https://www.hackthebox.eu/badge/75471&quot;&gt;&lt;/script&gt;
+![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
 
 
 
