@@ -21,7 +21,7 @@
 # Useful Pages:
 ## [About Me](/about.html)
 ## [Contact Me](/contact.html)
-## [Hack The Box Retired Machines](/HTB-Retired/HTB-RetiredMachines.html)
+## [Hack The Box Machines](/HTB-Machines.html)
 
 
 
