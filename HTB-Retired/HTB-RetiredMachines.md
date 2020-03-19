@@ -1,4 +1,6 @@
-# Grav3m1ndbyte's Hack The Box Retired Machines Walkthroughs 
+# [Grav3m1ndbyte's Resources Blog](index.md)
+
+# Grav3m1ndbyte's Hack The Box Retired Machines Walkthroughs
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
