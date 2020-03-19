@@ -14,11 +14,11 @@
 
 
 ## Retired Machines Walkthroughs
-###   [Postman](HTB-Retired/Postman/postman.html) - OS: Linux
+###   [Postman](/HTB-Retired/Postman/postman.html) - OS: Linux
 
 
 ## Completed Active Machines
-###  [Forest](HTB-Active/Forest/forest.html)
+###  [Forest](/HTB-Active/Forest/forest.html)
 
 
 ## My advice to you all!
