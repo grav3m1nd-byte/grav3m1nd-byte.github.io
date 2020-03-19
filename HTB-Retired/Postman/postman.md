@@ -1,3 +1,6 @@
+# [Grav3m1ndbyte's Resources Blog](index.md): [Hack The Box Retired Machines Walkthroughs](HTB-Retired/HTB-RetiredMachines.md)
+
+
 # Postman
 
 ![Postman Infocard](images/Postman.png)
