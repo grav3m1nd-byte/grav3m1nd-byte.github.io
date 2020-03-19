@@ -8,11 +8,11 @@
 
 ## Purpose of this site:
 
-  This site is meant to help people by sharing the paths I take on Hack the Box Machines I had completed. If anything I can be reached in the forum, DMs in Hack The Box or Discord. 
+  This site is meant to help people by sharing the resources I think are useful or have been useful, while giving other people's resources more exposure, which I understand helps them as well. In addition to this, I like to share the paths taken on Hack the Box Machines I had completed. If anything I can be reached in the forum, DMs in Hack The Box or Discord. 
 
-  As members are not supposed to release any write up while machines or challenges are stil Active, I will be updating the content as the machines start to get retired.
+  As [Hack The Box](https://www.hackthebox.eu/) members are not supposed to release any write up or walkthrough while machines or challenges are stil Active, I will be updating the content as the machines start to get retired.
 
-  Something I want everyone to keep in mind, what you will go through here is my path to Root the machine or to complete the challenge, not necessarily the only way or the best way. As we are humans, we all can make mistakes or end up going down rabbitholes. In some cases, I will still show some of the mistakes I've done and flag them.
+  Something I want everyone to keep in mind, what you will go through here is my path to own machines, to complete the challenge, or my usage of tools and resources, not necessarily the only way or the best way. As we are humans, we all can make mistakes or end up going down rabbitholes. In some cases, I will still show some of the mistakes I've done and flag them.
 
 
 
