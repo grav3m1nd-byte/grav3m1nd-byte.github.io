@@ -1,4 +1,4 @@
-# [Grav3m1ndbyte's Resources Blog](/index.md) > [Hack The Box Retired Machines Walkthroughs](/HTB-Retired/HTB-RetiredMachines.md)
+# [Grav3m1ndbyte's Resources Blog](/index.html) > [Hack The Box Retired Machines Walkthroughs](/HTB-Retired/HTB-RetiredMachines.html)
 
 
 # Postman
