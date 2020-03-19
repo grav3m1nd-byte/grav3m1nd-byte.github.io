@@ -6,3 +6,4 @@ description: Write-Ups from Hack The Box Machines and Challenges plus other cont
 disable_disk_cache: true
 include: [grav3m1nd-byte/HTB-WriteUps-RetiredMachines]
 timezone: America/New_York
+lsi: true
