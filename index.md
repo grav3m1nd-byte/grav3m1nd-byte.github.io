@@ -1,31 +1,7 @@
-# Grav3m1ndbyte's Hack The Box WriteUps
+# Grav3m1ndbyte's Resources Blog
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
-
-
-
-## Profiles and How to Contact me:
-  [Hack The Box Public Profile](https://www.hackthebox.eu/profile/75471)
-  
-  [Hack The Box Public Forum Profile](https://forum.hackthebox.eu/profile/grav3m1ndbyte)
-  
-  Discord Username: grav3m1ndbyte#7121
-  
-  Twitter: [@grav3m1ndbyte](https://twitter.com/grav3m1ndbyte)
-
-
-
-
-## Hi everyone!
-
-
-
-## Who am I:
-
-  I am a Security Engineer in the US East Coast with nearly 10 years in the industry. Through my career, I had performed Security Control and Vulnerability Assessments for public and private sectors. I love learning new things every day which lead me into the path of wanting to learn about Penetration Testing and Python; self-learner and multi-tasker by nature. At the moment, Hack The Box is a platform I use to further practice what I learn from Penetration Testing trainings I'm currently taking such as eJPT, which will be followed by eCPPT, and hopefully OSCP by the end of the year.
-
-  I also enjoy building new solutions for organizations while setting up the standard on how systems should be built from the ground up and securely.
 
 
 
