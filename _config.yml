@@ -1,9 +1,8 @@
 theme: jekyll-theme-hacker
 title: Grav3m1ndbyte
+layout: default
 description: Write-Ups from Hack The Box Machines and Challenges plus other content
 
 disable_disk_cache: true
-
 include: [grav3m1nd-byte/HTB-WriteUps-RetiredMachines]
-
 timezone: America/New_York
