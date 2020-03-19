@@ -1,4 +1,4 @@
-# [Grav3m1ndbyte's Resources Blog](/index.md) > About Me
+# [Grav3m1ndbyte's Resources Blog](/index.html) > About Me
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
