@@ -7,6 +7,6 @@
 
 
 
-# Forest
+# Resolute
 
 ![Resolute Infocard](/images/Resolute.png)
