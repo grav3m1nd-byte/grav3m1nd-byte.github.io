@@ -238,7 +238,7 @@ Also, it seems to be vulnerable to another RCE through the Package Updates funct
 
 ##### Exploiting an unauthenticated RCE vulnerability in Redis:
 
-As explained on [Victor Zhu's post in Medium](https://medium.com/@Victor.Z.Zhu/redis-unauthorized-access-vulnerability-simulation-victor-zhu-ac7a71b2e419) we can attempt to exploit a vulnerability in Redis were you can push a SSH Public Key (authorized_key) as the Redis configuration. In some instances Redis could be running as the root user, but in other, just like some services (Apache for example) it could be running with its own service account, typically redis would be the username.
+As explained on [Victor Zhu's post in Medium](https://medium.com/@Victor.Z.Zhu/redis-unauthorized-access-vulnerability-simulation-victor-zhu-ac7a71b2e419) we can attempt to exploit a vulnerability in Redis were you can push a SSH Public Key (authorized_key) as the Redis configuration. In some instances, Redis could be running as the root user, but in others, just like some services (Apache for example), it could be running with its own service account, typically redis would be the username.
 
 If I remember correctly, this flaw is something that could be configured to prevent it from happening, and along with this, you always have to make sure any service you configure does NOT allow anonymous authentication like FTP allows if not configured properly.
 
