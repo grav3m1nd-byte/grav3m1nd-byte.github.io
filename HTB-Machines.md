@@ -19,6 +19,11 @@
 
 ## Completed Active Machines
 ###  [Forest](/HTB-Active/forest.html)
+###  [Resolute](/HTB-Active/resolute.html)
+###  [Traverxec](/HTB-Active/traverxec.html)
+###  [OpenAdmin](/HTB-Active/openadmin.html)
+###  [Monteverde](/HTB-Active/monteverde.html)
+
 
 
 ## My advice to you all!
