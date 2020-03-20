@@ -15,7 +15,7 @@
 
 
 ## Retired Machines Walkthroughs
-###   [Postman](/HTB-Retired/Postman/postman.html) - OS: Linux
+###   [Postman](/HTB-Retired/Postman/postman.html) > OS: Linux
 
 
 ## Completed Active Machines
