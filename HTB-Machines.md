@@ -19,7 +19,7 @@
 
 
 ## Completed Active Machines
-###  [Forest](/HTB-Active/forest.html)
+###  [Forest](/HTB-Active/forest.html) > Available on March 21st once retired
 ###  [Resolute](/HTB-Active/resolute.html)
 ###  [Traverxec](/HTB-Active/traverxec.html)
 ###  [OpenAdmin](/HTB-Active/openadmin.html)
