@@ -11,7 +11,7 @@
   At the moment, I don't have much here as the rest of my walkthroughs are from machines that are still active and back when I started with Hack The Box I did not think of doing my own walkthrough until recently. If my assistance is needed, refer to my [Contact Me](/contact.html) page and feel free to do so.
 
 
-##
+
 
 
 ## Retired Machines Walkthroughs
@@ -31,7 +31,7 @@
 ###  [Registry](/HTB-Active/registry.html)
 ###  [Traceback](/HTB-Active/traceback.html)
 
-##
+
 
 ## My advice to you all!
 
