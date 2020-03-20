@@ -23,6 +23,12 @@
 ###  [Traverxec](/HTB-Active/traverxec.html)
 ###  [OpenAdmin](/HTB-Active/openadmin.html)
 ###  [Monteverde](/HTB-Active/monteverde.html)
+###  [Mango](/HTB-Active/mango.html)
+###  [Obscurity](/HTB-Active/obscurity.html)
+###  [Sauna](/HTB-Active/sauna.html)
+###  [Nest](/HTB-Active/nest.html)
+###  [Registry](/HTB-Active/registry.html)
+###  [Traceback](/HTB-Active/traceback.html)
 
 
 
