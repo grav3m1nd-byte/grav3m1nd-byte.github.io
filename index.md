@@ -1,7 +1,7 @@
 # [Grav3m1ndbyte's Resources Blog](index.html)
 
 
-![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/75471)
+![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
 
 
 
