@@ -539,7 +539,7 @@ chris
 
 ## Exploitation and Gaining Access
 
-Since Kerberos is available and we saw krbtgt user, let's check if all accounts have Kerberos Pre-Authentication enabled. Using GetNPUsers.py will help us test this and if one is found, it will let us retrieve their TGT to then crack it. ***Kerberoasting***
+Since Kerberos is available and we saw krbtgt user, let's check if all accounts have Kerberos Pre-Authentication enabled. By default, Kerberos Pre-Authentication is enabled, and has to be manually disabled per account (to my understanding). A great explanation was done by one of the Hack The Box members (kudos to VbScrub) and is worth watching, [GetNPUsers & Kerberos Pre-Auth Explained](https://www.youtube.com/watch?v=pZSyGRjHNO4&feature=youtu.be). Using GetNPUsers.py will help us test this and if one is found, it will let us retrieve their TGT to then crack it. ***Kerberoasting***
 
 
 ### GETNPUSERS
