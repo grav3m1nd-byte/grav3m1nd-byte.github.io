@@ -504,7 +504,7 @@ santi (1152)/ScriptPath:
 [*] Received 31 entries.
 ```
 
-As mentioned, enumerating through SAMR gave us visibility over all users including mailbox accounts. From this we can also build an user list easily:
+As mentioned, enumerating through SAMR gave us visibility over all users including mailbox accounts. From this we can also build a user list easily:
 ```
 root@kali:~/Documents/HTB-Labs/Forest# cat Forest_impacted-samr.txt | grep "Found user*" | cut -d":" -f2 | cut -d"," -f1 | tr -d " " > Forest_users.txt
 
