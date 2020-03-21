@@ -31,7 +31,15 @@ Here, I am designating the interface to use when communitcating to the HTB machi
 
 2) nmap: I think most people in the information technology and security space know what nmap does. It is a very versatile Port scanning tool which also allows you to use scripts to further target the services found. Just like anything, it can be a useful tool while it can also be damaging if the user is not careful.
 
-What I typically start with when using nmap is -sC to use all default non-intrusive nmap scripts on each service and -sV to get the service version information which is definitely important for us. Along with these two, we need to designate the port we will be targeting (-p) and personally I like to have as much verbosity as I can get in some cases, so I use -vvvv.
+What I typically start with when using nmap is:
+
+-sC: to use all default non-intrusive nmap scripts on each service 
+
+-sV: to get the service version information which is definitely important for us
+
+-p: to designate the port we will be targeting 
+
+-vvvv: for extended verbosity (as I like as many details as I can get)
 
 ```
 root@kali:~/Documents/HTB-Labs/Postman# masscan -e tun1 -p1-65535,U:1-65535 10.10.10.160 --rate=1000
