@@ -15,11 +15,10 @@
 
 
 ## Retired Machines Walkthroughs
-###   [Postman](/HTB-Retired/Postman/postman.html) > OS: Linux
-
+###  [Postman](/HTB-Retired/Postman/postman.html) > OS: Linux
+###  [Forest](/HTB-Retired/Forest/forest.html) > OS: Windows
 
 ## Completed Active Machines
-###  [Forest](/HTB-Active/forest.html) > Available on March 21st once retired
 ###  [Resolute](/HTB-Active/resolute.html)
 ###  [Traverxec](/HTB-Active/traverxec.html)
 ###  [OpenAdmin](/HTB-Active/openadmin.html)
