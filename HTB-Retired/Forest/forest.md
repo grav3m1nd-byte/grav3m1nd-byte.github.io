@@ -20,15 +20,24 @@
   For people not well versed in Active Directory and Windows, and even if you are, there some reading to do, or at least I recommend to do so, which is why I've added some resourcs below and also other links to some tools.
   
   Some great resources around this are below:
+  
   ### Resources:
+  
   1) [Active Directory Kill Chain Attack & Defense](https://github.com/infosecn1nja/AD-Attack-Defense/blob/master/README.md)
+  
   2) [MITRE ATT&CK: Kerberoasting](https://attack.mitre.org/techniques/T1208/)
+  
   3) [An Introduction to SMB for Network Security Analysts](https://401trg.com/an-introduction-to-smb-for-network-security-analysts/)
+  
   4) [[MS-SAMR]: Security Account Manager (SAM) Remote Protocol (Client-to-Server)](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-samr/4df07fab-1bbc-452f-8e92-7853a3c7e380)
+  
   5) [Configure SAM-R required permissions](https://docs.microsoft.com/en-us/advanced-threat-analytics/install-ata-step9-samr#step-9-configure-sam-r-required-permissions)
+  
   6) [Mitigating Exchange Permission Paths to Domain Admins in Active Directory](https://adsecurity.org/?p=4119)
 
 ***Let's get started!***
+
+
 
 ## Information Gathering / Footprinting and Scanning
 
@@ -49,6 +58,7 @@ Here, I am designating the interface to use when communitcating to the HTB machi
 2) nmap: I think most people in the information technology and security space know what nmap does. It is a very versatile Port scanning tool which also allows you to use scripts to further target the services found. Just like anything, it can be a useful tool while it can also be damaging if the user is not careful.
 
 What I typically start with when using nmap is -sC to use all default non-intrusive nmap scripts on each service and -sV to get the service version information which is definitely important for us. Along with these two, we need to designate the port we will be targeting (-p) and personally I like to have as much verbosity as I can get in some cases, so I use -vvvv.
+
 
 ### Masscan
 ```
@@ -92,6 +102,7 @@ As you can see, we found some UDP High Ports that at the moment we do not see a 
 root@kali:~/Documents/HTB-Labs/Forest# cat Forest_masscan.log | grep Discovered | cut -d" " -f4 | cut -d"/" -f1 | sort | xargs | tr " " ","
 135,139,3268,3269,389,445,464,47001,49664,49666,49667,49670,49677,49684,49695,49714,50604,50736,51127,52551,53,593,5985,636,88,9389
 ```
+
 
 ### NMAP
 ```
@@ -156,6 +167,7 @@ As you can see from the open ports found, we have the following which are very i
 Along with these, given that RPC and Dynamic RPC (on the TCP High Ports) are available, means to us that SAMR is also available. Why is this important? Well, SAMR or RPC over SMB, or Security Account Manager Remote Protocol, could potentially allow account enumeration with no authentication. That's a big deal, especially when Microsoft recommends to have this locked down (see Resource #5).
 
 With this being said, let's actually try and use Impacket's SAMRDump script to get user account information. This step will give you a lot of good information.
+
 
 ### SAMRDUMP
 ```
@@ -519,9 +531,12 @@ santi
 chris
 ```
 
+
+
 ## Exploitation and Gaining Access
 
 Since Kerberos is available and we saw krbtgt user, let's check if all accounts have Kerberos Pre-Authentication enabled. Using GetNPUsers.py will help us test this and if one is found, it will let us retrieve their TGT to then crack it. ***Kerberoasting***
+
 
 ### GETNPUSERS
 ```
@@ -539,6 +554,7 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:d9644faaaaef08d897e27b1127542f8e$8bdfa55873
 
 We just found the user **htb.local\svc-alfresco** (a service account) and its TGT; let's try to crack it
 
+
 ### JOHN THE RIPPER
 ```
 root@kali:~/Documents/HTB-Labs/Forest# john --wordlist=/usr/share/wordlists/rockyou.txt Forest_TGT_svc-alfresco.txt > Forest_svc-alfrescoCreds.txt
@@ -554,6 +570,7 @@ s3rvice          ($krb5asrep$23$svc-alfresco@HTB.LOCAL)
 ```
 
 We have **svc-alfresco:s3rvice** credential pair. Let's test it and its permissions to SMB and at the same time see if these credentials are valid while enumerating what it has access to (I could've used *smbmap* too).
+
 
 ### SMBCLIENT
 ```
@@ -603,6 +620,8 @@ e5e4e**********************0d9ed
 
 **AND we found the USER flag using svc-alfresco which resided in the account's Desktop directory.
 
+
+
 ## Privilege Escalation
 
 We need to get a deeper understanding of this AD environment and the accounts rights. There is a vulnerability in Exchange environments and two groups that would allow some accesses that should not happen, like account modification, and to escalate privileges, accounts in these groups would only need DCSync permissions, quite possible to do. Explained further in Resource #6. These groups are found through LDAP and by using [ldapdomaindump](https://github.com/dirkjanm/ldapdomaindump): EXCHANGE TRUSTED SUBSYSTEM and EXCHANGE WINDOWS PERMISSIONS.
@@ -610,6 +629,7 @@ We need to get a deeper understanding of this AD environment and the accounts ri
 Let's use [Bloodhound/Sharphound](https://github.com/BloodHoundAD/BloodHound) through our current session in evil-winrm.
 
 NOTE: To do this, you must first have Bloodhound setup and configured, a walkthrough by itself that I will skip. Also, pay close attention to the syntax when using Sharphound powershell script.
+
 
 ### SHARPHOUND
 ```
@@ -697,6 +717,7 @@ I selected PATH 0, but as you can notice by examining each path, there is not mu
 Technically speaking, we used the permissions svc-alfresco already has to modify accounts by being an "indirect" member of EXCHANGE TRUSTED SUBSYSTEM and EXCHANGE WINDOWS PERMISSIONS to delegate rights to itself by modifying domain DACL and give DCSync rights to itself. I know, it sounds confusing to explain!! At least the last Bloodhound screenshot shows this better.
 
 As we select a path and it was successful, we have to move fast and try to use it to dump secrets (NTDS.DIT). Let's use Impacket's Secretdump
+
 
 ### SECRETSDUMP
 ```
@@ -810,6 +831,7 @@ First thought of some people would be to try and crack this, but how about using
 
 To do this, we only need the following portion of the Administrator dump used as password:
 **aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6**
+
 
 ## Metasploit
 ```
