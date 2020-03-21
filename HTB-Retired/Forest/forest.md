@@ -17,7 +17,7 @@
 
   This Hack The Box machine is built on Windows operating system and revolves around Active Directory and Kerberos. Great thing about this machine just like other similar ones is that it can be very close to real-life. Active Directory is used across many Enterprise environments as their credential backbone and is a service that can allow different types of attacks if it is not setup correctly. Along with this (spoiler I know), it has Microsoft Exchange in the same box; this is something that is not common in my opinion unless it is small environment like a small business and there is not enough budget for a server farm. With the move to cloud services like Office 365, using Exchange will slowly decrease (I hope) unless you are in an 'Exchange Hybrid' model.
   
-  For people not well versed in Active Directory and Windows, and even if you are, there some reading to do, or at least I recommend to do so, which is why I've added some resourcs below and also other links to some tools.
+  For people not well versed in Active Directory and Windows, and even if you are, there is some reading to do, or at least I recommend to do so, which is why I've added some resources below and also other links to some tools.
   
   Some great resources around this are below:
   
