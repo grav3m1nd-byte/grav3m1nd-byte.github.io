@@ -21,7 +21,8 @@
   
   Some great resources around this are below:
   
-  ### Resources
+  
+  Resources
   
   
   1) [Active Directory Kill Chain Attack & Defense](https://github.com/infosecn1nja/AD-Attack-Defense/blob/master/README.md)
