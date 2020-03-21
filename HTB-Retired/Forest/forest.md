@@ -636,7 +636,9 @@ e5e4e**********************0d9ed
 
 ## Privilege Escalation
 
-We need to get a deeper understanding of this AD environment and the accounts rights. There is a vulnerability in Exchange environments and two groups that would allow some accesses that should not happen, like account modification, and to escalate privileges, accounts in these groups would only need DCSync permissions, quite possible to do. Explained further in Resource #6. These groups are found through LDAP and by using [ldapdomaindump](https://github.com/dirkjanm/ldapdomaindump): EXCHANGE TRUSTED SUBSYSTEM and EXCHANGE WINDOWS PERMISSIONS.
+We need to get a deeper understanding of this AD environment and the accounts rights. There is a vulnerability in Exchange environments and two groups that would allow some accesses that should not happen, like account modification, and to escalate privileges, accounts in these groups would only need DCSync permissions, quite possible to do. Explained further in Resource #6.
+
+This information can be also found through LDAP and/or by using [ldapdomaindump](https://github.com/dirkjanm/ldapdomaindump): EXCHANGE TRUSTED SUBSYSTEM and EXCHANGE WINDOWS PERMISSIONS.
 
 Let's use [Bloodhound/Sharphound](https://github.com/BloodHoundAD/BloodHound) through our current session in evil-winrm.
 
