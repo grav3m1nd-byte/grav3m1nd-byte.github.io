@@ -63,7 +63,7 @@ Here, I am designating the interface to use when communitcating to the HTB machi
 What I typically start with when using nmap is -sC to use all default non-intrusive nmap scripts on each service and -sV to get the service version information which is definitely important for us. Along with these two, we need to designate the port we will be targeting (-p) and personally I like to have as much verbosity as I can get in some cases, so I use -vvvv.
 
 
-### Masscan
+### MASSCAN
 ```
 root@kali:~# masscan -e tun1 -p1-65535,U:1-65535 10.10.10.161 --rate=1000 > Forest_masscan.log
 
