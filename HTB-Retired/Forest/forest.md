@@ -841,7 +841,7 @@ As we dumped "all secrets" available, notice a great one we need to use:
 
 **htb.local\Administrator:500:aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6:::**
 
-First thought of some people would be to try and crack this, but how about using it as it? There are different ways, one being through Metasploit's psexec and through one of the Impacket's SMB scripts; I went for Metasploit. In escence, both will be doing a **Pass-the-Hash** attack.
+First thought of some people would be to try and crack this, but how about using it as is? There are different ways, one being through Metasploit's psexec and through one of the Impacket's SMB scripts; I went for Metasploit. In escence, both will be doing a **Pass-the-Hash** attack.
 
 To do this, we only need the following portion of the Administrator dump used as password:
 **aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6**
