@@ -934,6 +934,6 @@ f0481**********************129cc
 ```
 ***Game Over: System Rooted and ROOT Flag found!***
 
-Something important to mention here is, there are other "commands" in Meterpreter to fully own the system even you accessed it as the NT AUTHORITY\SYSTEM, but I am not mentioning them here as the intent is that but to find the Root Flag. Obviously, I sticking to the scope of this exercise!
+Something important to mention here is, there are other "commands" in Meterpreter to fully own the system even when you  already accessed it as the NT AUTHORITY\SYSTEM, but I am not mentioning them here as the intent is to find the Root Flag. Obviously, I'm limiting the effort to the scope of this exercise; ***find the USER and ROOT flags***!
 
-If you enjoyed my Walkthrough, thought it was useful AND you are a member of Hack The Box, feel free throw a 'Respect'. Thanks!
+If you enjoyed my Walkthrough, thought it was useful AND if you are a member of Hack The Box, feel free throw a 'Respect'. Thanks!
