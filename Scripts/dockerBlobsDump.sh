@@ -1,27 +1,28 @@
 #!/bin/bash
 
-# Ideas taken from reading https://www.notsosecure.com/anatomy-of-a-hack-docker-registry/
+# References:
+# https://docs.docker.com/registry/spec/api/#introduction
+# https://www.notsosecure.com/anatomy-of-a-hack-docker-registry/
 
-# Written by grav3m1ndbyte (https://www.hackthebox.eu/profile/75471)
+# Written by grav3m1ndbyte
 
 printf "\n### Connecting to the Docker Registry API:"
 
-BASEURL="https://docker.registry.htb"
-CREDS="admin:admin"
-USER=`(echo $CREDS | cut -d":" -f1)`
-PASS=`(echo $CREDS | cut -d":" -f2)`
+BASEURL=<Docker_Target_Base_URL>
+CREDS=<credential_set_to_use> # For example: "username:password"
+USER=`(echo $CREDS | cut -d":" -f1)` # USER variable splits the CREDS variable to get the Username portion
+PASS=`(echo $CREDS | cut -d":" -f2)` # PASS variable splits the CREDS variable to get the Password portion
 
 printf "\nBase URL: $BASEURL"
 printf "\nUsername: $USER\nPassword: $PASS"
 
-#REPO="bolt-image"
+# Dynamically retrieving the Repository Name
 REPO=$(curl -s -X GET -k $BASEURL/v2/_catalog --basic --user $USER:$PASS | cut -d":" -f2 | sed -e 's/"//g' | tr -d "[" | tr -d "]" | tr -d "}")
 
 printf "\nRepository found: $REPO"
 
-#TAGS="latest"
+# Dynamically retrieving the Docker API Tags, also known as Reference Parameter
 TAGS=$(curl -s -X GET -k $BASEURL/v2/$REPO/tags/list --basic --user $USER:$PASS | cut -d"," -f2 | cut -d":" -f2 | sed -e 's/"//g' | tr -d "[" | tr -d "]" | tr -d "}")
-
 REF=$TAGS
 
 printf "\nReference Parameter (Tag): $REF\n"
