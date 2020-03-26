@@ -59,6 +59,8 @@ My go-to tools in this phase, which are typically used by many to start enumerat
 
 Here, I am designating the interface to use when communitcating to the HTB machine (-e) which will be the HTB VPN interface, along with -p to designate the port range to target but I will target ALL TCP and UDP Ports, and the transmission rate of packets per second (--rate).
 
+Similar to this, you could also run something like this: nmap -p- --min-rate=1000 -T4 
+
 2) nmap: I think most people in the information technology and security space know what nmap does. It is a very versatile Port scanning tool which also allows you to use scripts to further target the services found. Just like anything, it can be a useful tool while it can also be damaging if the user is not careful.
 
 What I typically start with when using nmap is:
