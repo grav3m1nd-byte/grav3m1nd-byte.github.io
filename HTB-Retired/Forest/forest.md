@@ -43,7 +43,7 @@
 
 
 
-## Enumeration: Footprinting and Scanning
+## Initial Enumeration: Footprinting and Scanning
 
 First of, we need to identify how to reach the system. In other words, we need to identify what are the services available from this machine.
 
