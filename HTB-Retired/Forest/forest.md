@@ -59,6 +59,8 @@ My go-to tools in this phase, which are typically used by many to start enumerat
 
 Here, I am designating the interface to use when communitcating to the HTB machine (-e) which will be the HTB VPN interface, along with -p to designate the port range to target but I will target ALL TCP and UDP Ports, and the transmission rate of packets per second (--rate).
 
+Similar to this, you could also run something like this: nmap -p- --min-rate=1000 -T4 
+
 2) nmap: I think most people in the information technology and security space know what nmap does. It is a very versatile Port scanning tool which also allows you to use scripts to further target the services found. Just like anything, it can be a useful tool while it can also be damaging if the user is not careful.
 
 What I typically start with when using nmap is:
@@ -504,7 +506,7 @@ santi (1152)/ScriptPath:
 [*] Received 31 entries.
 ```
 
-As mentioned, enumerating through SAMR gave us visibility over all users including mailbox accounts. From this we can also build an user list easily:
+As mentioned, enumerating through SAMR gave us visibility over all users including mailbox accounts. From this we can also build a user list easily:
 ```
 root@kali:~/Documents/HTB-Labs/Forest# cat Forest_impacted-samr.txt | grep "Found user*" | cut -d":" -f2 | cut -d"," -f1 | tr -d " " > Forest_users.txt
 
@@ -841,7 +843,7 @@ As we dumped "all secrets" available, notice a great one we need to use:
 
 **htb.local\Administrator:500:aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6:::**
 
-First thought of some people would be to try and crack this, but how about using it as it? There are different ways, one being through Metasploit's psexec and through one of the Impacket's SMB scripts; I went for Metasploit. In escence, both will be doing a **Pass-the-Hash** attack.
+First thought of some people would be to try and crack this, but how about using it as is? There are different ways, one being through Metasploit's psexec and through one of the Impacket's SMB or Psexec scripts; I went for Metasploit. In escence, both will be doing a **Pass-the-Hash** attack.
 
 To do this, we only need the following portion of the Administrator dump used as password:
 **aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6**
@@ -934,6 +936,6 @@ f0481**********************129cc
 ```
 ***Game Over: System Rooted and ROOT Flag found!***
 
-Something important to mention here is, there are other "commands" in Meterpreter to fully own the system even you accessed it as the NT AUTHORITY\SYSTEM, but I am not mentioning them here as the intent is that but to find the Root Flag. Obviously, I sticking to the scope of this exercise!
+Something important to mention here is, there are other "commands" in Meterpreter to fully own the system even when you  already accessed it as the NT AUTHORITY\SYSTEM, but I am not mentioning them here as the intent is to find the Root Flag. Obviously, I'm limiting the effort to the scope of this exercise; ***find the USER and ROOT flags***!
 
-If you enjoyed my Walkthrough, thought it was useful AND you are a member of Hack The Box, feel free throw a 'Respect'. Thanks!
+If you enjoyed my Walkthrough, thought it was useful AND if you are a member of Hack The Box, feel free throw a 'Respect'. Thanks!
