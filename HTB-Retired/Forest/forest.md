@@ -64,7 +64,7 @@ Similar to this, you could also run something like this: nmap -p- --min-rate=100
 2) nmap: I think most people in the information technology and security space know what nmap does. It is a very versatile Port scanning tool which also allows you to use scripts to further target the services found. Just like anything, it can be a useful tool while it can also be damaging if the user is not careful.
 
 What I typically start with when using nmap is:
-
+```
 -sC: to use all default non-intrusive nmap scripts on each service 
 
 -sV: to get the service version information which is definitely important for us
@@ -72,7 +72,7 @@ What I typically start with when using nmap is:
 -p: to designate the port we will be targeting 
 
 -vvvv: for extended verbosity (as I like as many details as I can get)
-
+```
 
 ### MASSCAN
 ```
@@ -166,7 +166,7 @@ SF:\x04bind\0\0\x10\0\x03");
 Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
 ```
 As you can see from the open ports found, we have the following which are very important:
-
+```
 -> Kerberos: 88/tcp    Microsoft Windows Kerberos
 
 -> LDAP: 389/tcp   Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
@@ -176,7 +176,7 @@ As you can see from the open ports found, we have the following which are very i
 -> LDAPS: 636/tcp 
 
 -> Windows Remote Management (WinRM): 5985/tcp  Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
-
+```
 
 Along with these, given that RPC and Dynamic RPC (on the TCP High Ports) are available, means to us that SAMR is also available. Why is this important? Well, SAMR or RPC over SMB, or Security Account Manager Remote Protocol, could potentially allow account enumeration with no authentication. That's a big deal, especially when Microsoft recommends to have this locked down (see Resource #5).
 
