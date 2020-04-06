@@ -19,11 +19,17 @@ Registry was a pretty interesting Linux box. Not much to say here without spoili
 
 ### Resources
   1) [Docker API Documentation](https://docs.docker.com/registry/spec/api/#introduction).
+
   2) [Anatomy of a hack: Docker Registry](https://www.notsosecure.com/anatomy-of-a-hack-docker-registry/)
+
   3) [My Own Script](https://github.com/grav3m1nd-byte/grav3m1nd-byte.github.io/blob/master/Scripts/dockerBlobsDump.sh)
+
   4) [Restic.net](https://restic.net/)
+
   5) [Create a REST server repository](https://restic.readthedocs.io/en/v0.4.0/Manual/#create-a-rest-server-repository)
+
   6) [SSH Port Forwarding Example](https://www.ssh.com/ssh/tunneling/example)
+
 
 ## Initial Enumeration: Footprinting and Scanning
 
