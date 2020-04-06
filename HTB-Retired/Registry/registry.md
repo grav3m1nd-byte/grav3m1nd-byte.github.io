@@ -636,6 +636,11 @@ kali@back0ff:~/Documents/HTB-Labs/Registry$ scp -i /home/kali/Documents/HTB-Labs
 ```
 Once you retrieve it, open it locally SQLite Browser, try and see what items of interest like the users table could be found and if any create a new file containing the credentials found: sqlite_hash.lst.
 
+```
+kali@back0ff:~/Documents/HTB-Labs/Registry$ cat sqlite_hash.lst 
+admin:$2y$10$e.ChUytg9SrL7AsboF2bX.wWKQ1LkS5Fi3/Z0yYD86.P5E9cpY7PK
+```
+
 At this point, we should try and crack these credentials using JohnTheRipper:
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ john --wordlist=/usr/share/wordlists/rockyou.txt sqlite_hash.lst > sqlite_creds.txt 
