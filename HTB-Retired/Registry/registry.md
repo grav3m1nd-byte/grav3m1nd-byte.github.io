@@ -548,7 +548,7 @@ user.txt
 bolt@bolt:~$ cat user.txt 
 ytc0y**********************3ywzi
 ```
-Listing files in the bolt's user home directory gives us the user flag file (WOOT WOOT!)
+Listing files in the bolt's user home directory gives us the user flag file **(WOOT WOOT!)**
 
 
 ## Privilege Escalation
@@ -610,7 +610,7 @@ Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
 Cost 1 (iteration count) is 1024 for all loaded hashes
 strawberry       (admin)
 ```
-** WOOT WOOT! We have now credentials to access Bolt CMS.
+**WOOT WOOT! We have now credentials to access Bolt CMS.**
 
 Let's try and enumerate web directories and php files so we can't find out how to access BOLT CMS from this box.
 ```
