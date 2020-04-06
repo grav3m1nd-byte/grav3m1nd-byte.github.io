@@ -789,7 +789,10 @@ Having done this, if we try to run the backup command, we cannot connect to the 
 
 At this point, we could also attempt to do SSH Remote Port Forwarding to bind a new service to registry.htb from a **NEW** terminal window:
 
-**SYNTAX:** *ssh -R RemotePort:localhost:RestPort -i bolt_id_rsa bolt@registry.htb*
+**SYNTAX:** 
+```ssh -R RemotePort:localhost:RestPort -i bolt_id_rsa bolt@registry.htb```
+
+Let's move forward and try this:
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ ssh -R 61234:localhost:8000 -i /home/kali/Documents/HTB-Labs/Registry/2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/id_rsa bolt@registry.htb
 
