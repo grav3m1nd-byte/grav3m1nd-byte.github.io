@@ -587,7 +587,22 @@ While digging through the blob directories, we found the following:
 
 2) Some scripts of interest (01-ssh.sh and 02-ssh.sh) under *2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/etc/profile.d/*
 
-Inspecting the second scripts gives us the passphrase for the *id_rsa* private key we found. Let's try these two:
+Inspecting the second scripts gives us the passphrase for the *id_rsa* private key we found. 
+
+```
+kali@back0ff:~/Documents/HTB-Labs/Registry$ cat 2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/etc/profile.d/02-ssh.sh
+#!/usr/bin/expect -f
+#eval `ssh-agent -s`
+spawn ssh-add /root/.ssh/id_rsa
+expect "Enter passphrase for /root/.ssh/id_rsa:"
+send "GkOcz221Ftb3ugog\n";
+expect "Identity added: /root/.ssh/id_rsa (/root/.ssh/id_rsa)"
+interact
+```
+Private key passphrase: ```GkOcz221Ftb3ugog```
+
+
+Let's try these two together:
 
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ ssh -i /home/kali/Documents/HTB-Labs/Registry/2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/id_rsa bolt@registry.htb
