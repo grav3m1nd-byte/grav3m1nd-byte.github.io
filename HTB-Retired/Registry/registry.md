@@ -18,6 +18,7 @@
 Registry was a pretty interesting Linux box. Not much to say here without spoiling this walkthrough, but the approach I found to be successful to own it did not exactly rely on the typical approach but exfiltration. Something I had not seen until I decided to do Registry; my very-first Hard-difficulty HTB box. I hope it is as insightful as it was for me.
 
 ### Resources
+
   1) [Docker API Documentation](https://docs.docker.com/registry/spec/api/#introduction).
 
   2) [Anatomy of a hack: Docker Registry](https://www.notsosecure.com/anatomy-of-a-hack-docker-registry/)
@@ -184,7 +185,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 21.21 seconds
 ```
 
-TCP 80 is accessible as well as TCP 443. TCP 443's certificate gives us some good information in how to approach this one, as well as the CN being docker.registry.htb, which is also a clue. It might be related to Docker Registries. See below the certificate content pulled by nmap.
+TCP 80 is accessible as well as TCP 443. TCP 443's certificate gives us some good information in how to approach this one, as well as the CN being *docker.registry.htb*, which is also a clue. It might be related to Docker Registries. See below the certificate content pulled by nmap.
 
 ```
 443/tcp open  ssl/http syn-ack nginx 1.14.0 (Ubuntu)
