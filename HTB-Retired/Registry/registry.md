@@ -201,7 +201,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 ===============================================================
 ```
 
-After running gobuster, we found a /v2 directory, which seems to be related to docker registry api. According to the Docker API Documentation, if a 401 Unauthorized is returned, it related to authentication not being handled properly (well something like that); in other words, accessing it requires you to provide credentials.
+After running gobuster, we found a /v2 directory, which seems to be related to docker registry api. According to the Docker API Documentation, if a 401 Unauthorized is returned, it is related to authentication not being handled properly (well something like that); in other words, accessing it requires you to provide credentials.
 
 When trying it on the browser it prompts for authentication which seems to be using a default admin:admin credentials but only a empty json response comes up.
 Looks like we need to do some research on Docker APIs and there is also a good document available on how to hack on Docker APIs and interact with them (see the resources provided).
