@@ -17,6 +17,7 @@
 ## Retired Machines Walkthroughs
 ###  [Postman](/HTB-Retired/Postman/postman.html) > OS: Linux
 ###  [Forest](/HTB-Retired/Forest/forest.html) > OS: Windows
+###  [Registry](/HTB-Retired/Registry/registry.html) > OS: Linux
 
 ## Completed Active Machines
 ###  [Resolute](/HTB-Active/resolute.html)
@@ -27,7 +28,6 @@
 ###  [Obscurity](/HTB-Active/obscurity.html)
 ###  [Sauna](/HTB-Active/sauna.html)
 ###  [Nest](/HTB-Active/nest.html)
-###  [Registry](/HTB-Active/registry.html)
 ###  [Traceback](/HTB-Active/traceback.html)
 
 
