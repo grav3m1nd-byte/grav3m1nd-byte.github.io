@@ -19,7 +19,7 @@ Registry was a pretty interesting Linux box. Not much to say here without spoili
 
 ### Resources
 
-  1) [Docker API Documentation](https://docs.docker.com/registry/spec/api/#introduction).
+  1) [Docker API Documentation](https://docs.docker.com/registry/spec/api/#introduction)
 
   2) [Anatomy of a hack: Docker Registry](https://www.notsosecure.com/anatomy-of-a-hack-docker-registry/)
 
