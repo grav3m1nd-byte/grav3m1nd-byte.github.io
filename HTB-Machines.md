@@ -1,4 +1,4 @@
-# [Grav3m1ndbyte's Resources Blog](/index.html) > Hack The Box Machine Walkthroughs
+# [Grav3m1ndbyte's Resources Blog](/index.html) > HTB Machine and Challenge Walkthroughs
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
@@ -30,6 +30,8 @@
 ###  [Nest](/HTB-Active/nest.html)
 ###  [Traceback](/HTB-Active/traceback.html)
 
+## Retired Challenges
+###  [Lernaean](/HTB-Retired/Challenges/lernaean.html) > Web Challenge
 
 
 ## My advice to you all!
