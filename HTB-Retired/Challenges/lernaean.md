@@ -50,12 +50,13 @@ At first glance, it doesn't look like much so I thought of looking at the source
 
 But also, I thought of lookingfor anything interesting in the HTTP Request and Response, but nothing especial.
 
-![Lernaean Page](/images/Lernean_Header.png)
+![Lernaean Page](/images/Lernean_headers.png)
 
 Tried as well a basic SQL Injection but nothing either, other than an *Invalid password!* message at the top.
 
-![Lernaean SQLi](/images/Lernean_SQL.png)
-![Lernaean SQLi 2](/images/Lernean_SQL2.png)
+![Lernaean SQLi](/images/Lernean_headers_SQL.png)
+
+![Lernaean SQLi 2](/images/Lernean_headers_SQL2.png)
 
 At this point, I can try with a random passwword even though it didn't give me much above. I tried *test123*.
 
@@ -1849,6 +1850,8 @@ ERROR: Invalid Password!
 
 ERROR: Invalid Password!
 ```
+
+### Flag:
 
 AND right after testing with *12345678910*, it tests **leonardo** which seems to be the password. See below:
 
