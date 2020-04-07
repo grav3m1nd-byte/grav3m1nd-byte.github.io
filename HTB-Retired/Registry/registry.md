@@ -1015,11 +1015,19 @@ kali@back0ff:~/Documents/HTB-Labs/Registry$ restic restore 3a378c88 -r rest:http
 enter password for repository: 
 repository 5966aab0 opened successfully, password is correct
 restoring <Snapshot 3a378c88 of [/root/root.txt] at 2020-03-11 01:18:58.991866815 +0000 UTC by root@bolt> to .
+```
+Let's read *root.txt* and get the Root Flag!
+
+```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ cat root.txt 
 ntrkz**********************kztgw
 ```
 
 **AND WE GOT THE ROOT FLAG!!**
+
+
+If you enjoyed my Walkthrough, thought it was useful AND you are a member of Hack The Box, feel free throw a 'Respect'. Thanks!
+
 
 
 
