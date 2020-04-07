@@ -23,7 +23,7 @@
 
   [Contact Me](/contact.html)
   
-  [Hack The Box Machines](/HTB-Machines.html)
+  [HTB Machine and Challenge Walkthroughs](/HTB-Machines.html)
   
   [Useful Scripts and others](/Scripts/scripts.html) > Coming Soon!
 
