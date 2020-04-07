@@ -52,13 +52,13 @@ But also, I thought of lookingfor anything interesting in the HTTP Request and R
 
 ![Lernaean Page](/images/Lernean_headers.png)
 
-Tried as well a basic SQL Injection but nothing either, other than an *Invalid password!* message at the top.
+Tried as well a basic SQL Injection but nothing either.
 
 ![Lernaean SQLi](/images/Lernean_headers_SQL.png)
 
 ![Lernaean SQLi 2](/images/Lernean_headers_SQL2.png)
 
-At this point, I can try with a random passwword even though it didn't give me much above. I tried *test123*.
+At this point, I can try with a random passwword even though it didn't give me much above. I tried *test123*, but didn't anything other than an *Invalid password!* message at the top.
 
 ![Lernaean Test 2](/images/Lernean_test_resp2.png)
 
@@ -1881,6 +1881,6 @@ AND right after testing with *12345678910*, it tests **leonardo** which seems to
 </html>
 ```
 
-As you notice in the response, we got the flag which is *HTB{l1k3_4_b0s5_s0n}*
+As you notice in the response, we got the flag which is **HTB{l1k3_4_b0s5_s0n}**
 
 Hope you all enjoyed this!
