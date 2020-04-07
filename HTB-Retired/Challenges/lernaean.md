@@ -58,7 +58,7 @@ Tried as well a basic SQL Injection but nothing either.
 
 ![Lernaean SQLi 2](/images/Lernean_headers_SQL2.png)
 
-At this point, I can try with a random passwword even though it didn't give me much above. I tried *test123*, but didn't anything other than an *Invalid password!* message at the top.
+At this point, I can try with a random passwword even though it didn't give me much above. I tried *test123*, but didn't get anything other than an *Invalid password!* message at the top.
 
 ![Lernaean Test 2](/images/Lernean_test_resp2.png)
 
