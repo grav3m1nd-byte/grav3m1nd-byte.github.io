@@ -19,6 +19,9 @@
 ###  [Forest](/HTB-Retired/Forest/forest.html) > OS: Windows
 ###  [Registry](/HTB-Retired/Registry/registry.html) > OS: Linux
 
+
+
+
 ## Completed Active Machines
 ###  [Resolute](/HTB-Active/resolute.html)
 ###  [Traverxec](/HTB-Active/traverxec.html)
@@ -30,8 +33,14 @@
 ###  [Nest](/HTB-Active/nest.html)
 ###  [Traceback](/HTB-Active/traceback.html)
 
+
+
+
+
 ## Retired Challenges
 ###  [Lernaean](/HTB-Retired/Challenges/lernaean.html) > Web Challenge
+
+
 
 
 ## My advice to you all!
