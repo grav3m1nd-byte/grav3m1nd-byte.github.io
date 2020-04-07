@@ -1,4 +1,4 @@
-# [Grav3m1ndbyte's Resources Blog](/index.html) > [Hack The Box Machine Walkthroughs](/HTB-Machines.html)
+# [Grav3m1ndbyte's Resources Blog](/index.html) > [HTB Machine Walkthroughs](/HTB-Machines.html)
 
 
 ![Grav3m1ndbyte HTB Badge](https://www.hackthebox.eu/badge/image/75471)
@@ -565,3 +565,8 @@ PS: This whole write-up looks straight forward but something to keep in mind is 
 Also, on the final phase, we used Metasploit, but keep in mind you cannot always rely on Metasploit. Force yourself in using other tools.
 
 If you enjoyed my Walkthrough, thought it was useful AND you are a member of Hack The Box, feel free throw a 'Respect'. Thanks!
+
+
+
+
+
