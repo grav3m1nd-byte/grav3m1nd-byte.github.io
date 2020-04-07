@@ -39,7 +39,7 @@ First of, we need to identify how to reach the system. In other words, we need t
 Let's start by adding this machine's IP address to the hosts file and create an alias:
 
 ```
-kali@back0ff:~/Documents/HTB-Labs/Postman# sudo echo "10.10.10.159  registry.htb" >> /etc/hosts
+kali@back0ff:~/Documents/HTB-Labs/Registry$ sudo echo "10.10.10.159  registry.htb" >> /etc/hosts
 ```
 
 My go-to tools in this phase, which are typically used by many to start enumerating, are:
@@ -273,6 +273,7 @@ After interacting with the *Docker API* a little, we find the repositories, tags
 
 
 ### CURL
+
 ```
 kali@back0ff:~/Documents/HTB-Labs/Registry$ curl -v -X GET -k https://docker.registry.htb/v2/_catalog --basic --user admin:admin
 Note: Unnecessary use of -X or --request, GET is already inferred.
@@ -718,7 +719,9 @@ Cost 1 (iteration count) is 1024 for all loaded hashes
 strawberry       (admin)
 ```
 
-WOOT WOOT! We have now credentials to access Bolt CMS. The credentials are **admin:strawberry**.
+WOOT WOOT! We have now credentials to access Bolt CMS.
+
+The credentials are: ```admin:strawberry```
 
 Let's try and enumerate web directories and php files so we can't find out how to access BOLT CMS from this box.
 
