@@ -225,7 +225,7 @@ TCP80 doesn't give me much other that default webserver information:
 
 ![Registry_TCP80](/images/Registry_TCP80.png)
 
-BUT TCP443, as mentioned above gave us the certificate information, and a blank page:
+BUT TCP443, as mentioned above, it gave us the certificate information, and a blank page:
 
 ![Registry_TCP443](/images/Registry_TCP443.png)
 
