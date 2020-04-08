@@ -50,7 +50,8 @@ My go-to tools in this phase, which are typically used by many to start enumerat
 The options I used are the following:
 
 ```
--e -> designating the interface to use when communitcating to the HTB machine, which will be the HTB VPN interface
+-e -> designating the interface to use when communitcating to the HTB machine, 
+	I am using the HTB VPN interface
 -p -> to designate the port range to target: 
 	1-65535,U:1-65535 -> to target all TCP and UDP ports
 --rate -> transmission rate of packets per second
