@@ -68,13 +68,13 @@ Similar to this, you could also run something like:
 What I typically start with when using nmap is:
 
 ```
--sC: to use all default non-intrusive nmap scripts on each service 
+-sC -> to use all default non-intrusive nmap scripts on each service 
 
--sV: to get the service version information which is definitely important for us
+-sV -> to get the service version information which is definitely important for us
 
--p: to designate the port we will be targeting 
+-p -> to designate the port we will be targeting 
 
--vvvv: for extended verbosity (as I like as many details as I can get)
+-vvvv -> for extended verbosity (as I like as many details as I can get)
 ```
 
 
