@@ -17,6 +17,7 @@
 
 Registry was a pretty interesting Linux box. Not much to say here without spoiling this walkthrough, but the approach I found to be successful to own it did not exactly rely on the typical approach but exfiltration. Something I had not seen until I decided to do Registry; my very-first Hard-difficulty HTB box. I hope it is as insightful as it was for me.
 
+
 ### Resources
 
   1) [Docker API Documentation](https://docs.docker.com/registry/spec/api/#introduction)
@@ -46,9 +47,17 @@ My go-to tools in this phase, which are typically used by many to start enumerat
 
 1) masscan: very nice port scanning tool that allows finding open ports quickly. To me this is a tool to narrow down the scope of the enumeration so we can focus on open ports only when using nmap.
 
-Here, I am designating the interface to use when communitcating to the HTB machine (-e) which will be the HTB VPN interface, along with -p to designate the port range to target but I will target ALL TCP and UDP Ports, and the transmission rate of packets per second (--rate).
+The options I used are the following:
 
-Similar to this, you could also run something like this:
+```
+-e -> designating the interface to use when communitcating to the HTB machine, which will be the HTB VPN interface
+-p -> to designate the port range to target: 
+	1-65535,U:1-65535 -> to target all TCP and UDP ports
+--rate -> transmission rate of packets per second
+```
+
+
+Similar to this, you could also run something like:
 
 ```nmap -p- --min-rate=1000 -T4 <hostname>```
 
