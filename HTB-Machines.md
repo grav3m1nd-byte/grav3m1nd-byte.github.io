@@ -18,7 +18,7 @@
 ###  [Postman](/HTB-Retired/Postman/postman.html) > OS: Linux
 ###  [Forest](/HTB-Retired/Forest/forest.html) > OS: Windows
 ###  [Registry](/HTB-Retired/Registry/registry.html) > OS: Linux
-###  [Traverxec](/HTB-Retired/Traverxec/traverxec.html)
+###  [Traverxec](/HTB-Retired/Traverxec/traverxec.html) > OS: Linux
 
 
 
