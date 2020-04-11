@@ -410,7 +410,7 @@ To do this, based on Nostromo documentation, it would have to be attempted as:
 
 *http://traverxec.htb/~david*
 
-![Traverxec-page-user](Traverxec-page-user.png)
+![Traverxec-page-user](/images/Traverxec-page-user.png)
 
 As you can see we accessed something (not too revealing though) that confirms this. Let's go back to Metasploit's shell session and keep enumerating and find a way to switch to david's user.
 
