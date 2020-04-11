@@ -18,13 +18,12 @@
 ###  [Postman](/HTB-Retired/Postman/postman.html) > OS: Linux
 ###  [Forest](/HTB-Retired/Forest/forest.html) > OS: Windows
 ###  [Registry](/HTB-Retired/Registry/registry.html) > OS: Linux
-
+###  [Traverxec](/HTB-Retired/Traverxec/traverxec.html)
 
 
 
 ## Completed Active Machines
 ###  [Resolute](/HTB-Active/resolute.html)
-###  [Traverxec](/HTB-Active/traverxec.html)
 ###  [OpenAdmin](/HTB-Active/openadmin.html)
 ###  [Monteverde](/HTB-Active/monteverde.html)
 ###  [Mango](/HTB-Active/mango.html)
