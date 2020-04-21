@@ -31,7 +31,8 @@
 ###  [Sauna](/HTB-Active/sauna.html)
 ###  [Nest](/HTB-Active/nest.html)
 ###  [Traceback](/HTB-Active/traceback.html)
-
+###  [Remote](/HTB-Active/remote.html)
+###  [Servmon](/HTB-Active/servmon.html)
 
 
 
