@@ -19,14 +19,14 @@
 ###  [Forest](/HTB-Retired/Forest/forest.html) > OS: Windows
 ###  [Registry](/HTB-Retired/Registry/registry.html) > OS: Linux
 ###  [Traverxec](/HTB-Retired/Traverxec/traverxec.html) > OS: Linux
+###  [Mango](/HTB-Retired/Mango/mango.html) > OS: Linux (Coming Soon!)
+###  [OpenAdmin](/HTB-Retired/OpenAdmin/openadmin.html) > OS: Linux (Coming Soon!)
 
 
 
 ## Completed Active Machines
 ###  [Resolute](/HTB-Active/resolute.html)
-###  [OpenAdmin](/HTB-Active/openadmin.html)
 ###  [Monteverde](/HTB-Active/monteverde.html)
-###  [Mango](/HTB-Active/mango.html)
 ###  [Obscurity](/HTB-Active/obscurity.html)
 ###  [Sauna](/HTB-Active/sauna.html)
 ###  [Nest](/HTB-Active/nest.html)
