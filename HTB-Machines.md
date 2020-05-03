@@ -15,36 +15,36 @@
 
 
 ## Retired Machines Walkthroughs
-  ###  [Postman](/HTB-Retired/Postman/postman.html) > OS: Linux
-  ###  [Forest](/HTB-Retired/Forest/forest.html) > OS: Windows
-  ###  [Registry](/HTB-Retired/Registry/registry.html) > OS: Linux
-  ###  [Traverxec](/HTB-Retired/Traverxec/traverxec.html) > OS: Linux
-  ###  [Mango](/HTB-Retired/Mango/mango.html) > OS: Linux (Coming Soon!)
-  ###  [OpenAdmin](/HTB-Retired/OpenAdmin/openadmin.html) > OS: Linux (Coming Soon!)
+	###  [Postman](/HTB-Retired/Postman/postman.html) > OS: Linux
+	###  [Forest](/HTB-Retired/Forest/forest.html) > OS: Windows
+	###  [Registry](/HTB-Retired/Registry/registry.html) > OS: Linux
+	###  [Traverxec](/HTB-Retired/Traverxec/traverxec.html) > OS: Linux
+	###  [Mango](/HTB-Retired/Mango/mango.html) > OS: Linux (Coming Soon!)
+	###  [OpenAdmin](/HTB-Retired/OpenAdmin/openadmin.html) > OS: Linux (Coming Soon!)
 
 
 
 ## Completed Active Machines
-  ###  [Resolute](/HTB-Active/resolute.html)
-  ###  [Monteverde](/HTB-Active/monteverde.html)
-  ###  [Obscurity](/HTB-Active/obscurity.html)
-  ###  [Sauna](/HTB-Active/sauna.html)
-  ###  [Nest](/HTB-Active/nest.html)
-  ###  [Traceback](/HTB-Active/traceback.html)
-  ###  [Remote](/HTB-Active/remote.html)
-  ###  [Servmon](/HTB-Active/servmon.html)
-  ###  [Cascade](/HTB-Active/cascade.html)
+	###  [Resolute](/HTB-Active/resolute.html)
+	###  [Monteverde](/HTB-Active/monteverde.html)
+	###  [Obscurity](/HTB-Active/obscurity.html)
+	###  [Sauna](/HTB-Active/sauna.html)
+	###  [Nest](/HTB-Active/nest.html)
+	###  [Traceback](/HTB-Active/traceback.html)
+	###  [Remote](/HTB-Active/remote.html)
+	###  [Servmon](/HTB-Active/servmon.html)
+	###  [Cascade](/HTB-Active/cascade.html)
 
 
 
 ## Retired Challenges
-  ###  [Lernaean](/HTB-Retired/Challenges/lernaean.html) > Web Challenge
+	###  [Lernaean](/HTB-Retired/Challenges/lernaean.html) > Web Challenge
 
 
 
 
 ## My advice to you all!
 
-1. Through your learning process, be patient and try not to get frustrated, but if you do, step out for a little bit.
-2. Try to enjoy the process.
-3. Go to the forum, go to Discord, contact other members that had rooted or completed the boxes. There is a lot of people wiliing to help.
+	1. Through your learning process, be patient and try not to get frustrated, but if you do, step out for a little bit.
+	2. Try to enjoy the process.
+	3. Go to the forum, go to Discord, contact other members that had rooted or completed the boxes. There is a lot of people wiliing to help.
