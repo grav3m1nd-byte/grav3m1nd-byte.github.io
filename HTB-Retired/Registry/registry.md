@@ -934,7 +934,8 @@ At this point, we could also attempt to do SSH Remote Port Forwarding to bind a 
 
 **SYNTAX:**
 
-```ssh -R <RemotePort>:localhost:<LocalPort> -i <Private_Key> <username>@<remoteHost>
+```
+ssh -R <RemotePort>:localhost:<LocalPort> -i <Private_Key> <username>@<remoteHost>
 
 Where:
 RemotePort: is the new port you have Registry listen to which will forward data to the localhost:LocalPort.
